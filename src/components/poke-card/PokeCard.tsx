@@ -1,32 +1,47 @@
-import React from "react";
+import "./pokeCard.css"
 
-export const PokeCard: React.FC = () => {
+interface PokeCardProps {
+    id: string;
+    name: string;
+    imageUrl: string;
+    stats: {
+        base_stat:number,
+        stat:{name:string}
+    }[];
+    type: string;
+}
+
+export const PokeCard = ({
+    id,
+    name,
+    imageUrl,
+    stats,
+    type
+
+}: PokeCardProps) => {
+
+    const pokemonName = name[0].toUpperCase() + name.substring(1);
     return (
-        <div className="poke-card">
-            <div className="poke-card__top">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="Pikachu" />
-            </div>
-            <div className="poke-card__bottom">
-                <h3 className="poke-card__name">Pikachu</h3>
-                <div className="poke-card__stats">
-                    <table>
-                        <tr>
-                            <td>HP</td>
-                            <td>35</td>
-                        </tr>
-                        <tr>
-                            <td>Attack</td>
-                            <td>55</td>
-                        </tr>
-                        <tr>
-                            <td>Defense</td>
-                            <td>40</td>
-                        </tr>
-                        <tr>
-                            <td>Special Attack</td>
-                            <td>50</td>
-                        </tr>
-                    </table>
+        <div className={`poke-card ${type ? `poke-card--${type}`: ''} `}>
+                <span className="poke-card__id">{id}</span>
+            <div>
+                <h3 className="poke-card__name">{pokemonName}</h3>
+                <div className="poke-card__top">
+                    <img src={imageUrl} alt={name} />
+                </div>
+                <div className="poke-card__bottom">
+                    <div className="poke-card__stats">
+                        <table>
+                            <tbody>
+                                {stats && stats.map((stat) => (
+                                    <tr key={stat.stat.name}>
+                                        <td>{stat.stat.name}</td>
+                                        <td>{stat.base_stat}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
