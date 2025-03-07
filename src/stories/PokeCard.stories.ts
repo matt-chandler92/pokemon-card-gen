@@ -8,9 +8,6 @@ const pokemonData =  await fetchPokemon(25).then((data) => {
         return data;
     }); 
 
-console.log(pokemonData);
-
-
 const meta = {
     title: "Example/PokeCard",
     component: PokeCard,
