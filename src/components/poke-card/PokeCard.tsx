@@ -1,31 +1,39 @@
-import React from "react";
+interface PokeCardProps {
+    id: string;
+    name: string;
+    imageUrl: string;
+    stats: {
+        base_stat:number,
+        stat:{name:string}
+    }[];
+}
 
-export const PokeCard: React.FC = () => {
+export const PokeCard = ({
+    id,
+    name,
+    imageUrl,
+    stats
+
+}: PokeCardProps) => {
+
+    const pokemonName = name[0].toUpperCase() + name.substring(1);
     return (
         <div className="poke-card">
             <div className="poke-card__top">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="Pikachu" />
+                <img src={imageUrl} alt={name} />
             </div>
             <div className="poke-card__bottom">
-                <h3 className="poke-card__name">Pikachu</h3>
+                <h3 className="poke-card__name">{id}: {pokemonName}</h3>
                 <div className="poke-card__stats">
                     <table>
-                        <tr>
-                            <td>HP</td>
-                            <td>35</td>
-                        </tr>
-                        <tr>
-                            <td>Attack</td>
-                            <td>55</td>
-                        </tr>
-                        <tr>
-                            <td>Defense</td>
-                            <td>40</td>
-                        </tr>
-                        <tr>
-                            <td>Special Attack</td>
-                            <td>50</td>
-                        </tr>
+                        <tbody>
+                            {stats && stats.map((stat) => (
+                                <tr key={stat.stat.name}>
+                                    <td>{stat.stat.name}</td>
+                                    <td>{stat.base_stat}</td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
             </div>
