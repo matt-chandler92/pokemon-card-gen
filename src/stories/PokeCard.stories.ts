@@ -27,5 +27,6 @@ export const Default: Story = {args: {
     id: pokemonData.id,
     name: pokemonData.name,
     imageUrl: pokemonData.sprites.other["official-artwork"].front_default,
-    stats: pokemonData.stats
+    stats: pokemonData.stats,
+    type: pokemonData.types[0].type.name
 }};
